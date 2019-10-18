@@ -18,31 +18,19 @@
 
 <script>
 import Vue from "vue";
-import axios from 'axios'
-import config from '@/config'
-
-const client = axios.create({
-  baseURL: "https://qiita.com/api/v2/",
-  headers: {
-    Authorization: "Bearer " + config.token
-  }
-});
 
 export default Vue.extend({
   name: "ItemList",
   props: {
+    items: Array,
     userIds: Array
   },
   data() {
     return {
-      items: [],
       filter: {
         userId: "なし"
       }
     };
-  },
-  async mounted() {
-    // await this.fetchAllItem();
   },
   computed: {
     filteredItemsByUserId() {
@@ -57,23 +45,6 @@ export default Vue.extend({
       return this.items;
     },
   },
-  methods: {
-    async fetchAllItem() {
-      const fetchAllItems = []
-      for(const userId of this.userIds) {
-        fetchAllItems.push(this.fetchItemsBy(userId));
-      }
-      Promise.all(fetchAllItems).then((itemsArray) => {
-        for(const userItems of itemsArray) {
-          this.items.push(...userItems);
-        }
-      })
-    },
-    async fetchItemsBy(userId) {
-      const { data } = await client.get(`users/${userId}/items`);
-      return data;
-    },
-  }
 });
 </script>
 
