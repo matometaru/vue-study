@@ -1,26 +1,18 @@
 <template>
-  <div class="directory">
-    <div class="directory-user">
-      <h2>ユーザー一覧</h2>
-      <ul class="directory-user-list">
-        <li v-for="id in userIds" :key="id">{{ id }}</li>
-      </ul>
+  <div class="item">
+    <h2 class="item-header">記事一覧</h2>
+    <div>
+      <label>ユーザで絞り込み: </label>
+      <select v-model="filter.userId">
+        <option value="なし">なし</option>
+        <option v-for="id in userIds" :value="id" :key="id">{{ id }}</option>
+      </select>
     </div>
-    <div class="directory-item">
-      <h2 class="directory-item-header">記事一覧</h2>
-      <div>
-        <label>ユーザで絞り込み: </label>
-        <select v-model="filter.userId">
-          <option value="なし">なし</option>
-          <option v-for="id in userIds" :value="id" :key="id">{{ id }}</option>
-        </select>
-      </div>
-      <ul class="directory-item-list">
-        <li v-for="item in filteredItems" :key="item.id">
-          <a :href="item.url">{{ item.title }}</a>
-        </li>
-      </ul>
-    </div>
+    <ul class="item-list">
+      <li v-for="item in filteredItems" :key="item.id">
+        <a :href="item.url">{{ item.title }}</a>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -84,31 +76,15 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
-.directory {
-  margin: 40px 0 0;
-  ul {
-    list-style: none;
-  }
-  &-user {
-    &-list {
-      li {
-        display: inline-block;
-        & + li {
-          margin-left: 1em;
-        }
-      }
-    }
-  }
-  &-item {
-    &-list {
-      font-size: 18px;
-      text-align: left;
-      width: 500px;
-      margin: 0 auto;
-      li {
-        & + li {
-          margin-top: .5em;
-        }
+.item {
+  &-list {
+    font-size: 18px;
+    text-align: left;
+    width: 500px;
+    margin: 0 auto;
+    li {
+      & + li {
+        margin-top: .5em;
       }
     }
   }

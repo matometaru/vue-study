@@ -1,17 +1,20 @@
 <template>
   <div>
-    <Directory />
+    <UserList />
+    <ItemList />
   </div>
 </template>
 
 <script>
 import Vue from "vue";
-import Directory from "@/components/Directory.vue";
+import UserList from "@/components/UserList.vue";
+import ItemList from "@/components/ItemList.vue";
 
 export default Vue.extend({
   name: "directory",
   components: {
-    Directory
+    UserList,
+    ItemList,
   }
 });
 </script>
