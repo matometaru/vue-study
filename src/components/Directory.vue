@@ -1,16 +1,26 @@
 <template>
   <div class="directory">
-    <button @click="fetchAllItem">取得</button>
-    <ul class="directory-user-list">
-      <li v-for="id in userIds" :key="id">
-        {{ id }}
-      </li>
-    </ul>
-    <ul class="directory-item-list">
-      <li v-for="item in items" :key="item.id">
-        <a :href="item.url">{{ item.title }}</a>
-      </li>
-    </ul>
+    <div class="directory-user">
+      <h2>ユーザー一覧</h2>
+      <ul class="directory-user-list">
+        <li v-for="id in userIds" :key="id">{{ id }}</li>
+      </ul>
+    </div>
+    <div class="directory-item">
+      <h2 class="directory-item-header">記事一覧</h2>
+      <div>
+        <label>ユーザで絞り込み: </label>
+        <select v-model="filter.userId">
+          <option value="なし">なし</option>
+          <option v-for="id in userIds" :value="id" :key="id">{{ id }}</option>
+        </select>
+      </div>
+      <ul class="directory-item-list">
+        <li v-for="item in filteredItems" :key="item.id">
+          <a :href="item.url">{{ item.title }}</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -32,16 +42,26 @@ export default Vue.extend({
     return {
       items: [],
       userIds: config.userIds,
+      filter: {
+        userId: "なし"
+      }
     };
   },
   async mounted() {
+    // await this.fetchAllItem();
   },
   computed: {
-    filteredItems() {
+    filteredItemsByUserId() {
       return this.items.filter((item) => {
-        item.name === "kitanote"
+        return item.user.id === this.filter.userId
       });
-    }
+    },
+    filteredItems() {
+      if(this.filter.userId !== "なし") {
+        return this.filteredItemsByUserId;
+      }
+      return this.items;
+    },
   },
   methods: {
     async fetchAllItem() {
