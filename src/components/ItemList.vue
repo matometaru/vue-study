@@ -29,11 +29,13 @@ const client = axios.create({
 });
 
 export default Vue.extend({
-  name: "Directory",
+  name: "ItemList",
+  props: {
+    userIds: Array
+  },
   data() {
     return {
       items: [],
-      userIds: config.userIds,
       filter: {
         userId: "なし"
       }

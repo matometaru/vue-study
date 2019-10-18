@@ -13,10 +13,8 @@ import config from '@/config'
 
 export default Vue.extend({
   name: "UserList",
-  data() {
-    return {
-      userIds: config.userIds,
-    };
+  props: {
+    userIds: Array
   },
 });
 </script>
