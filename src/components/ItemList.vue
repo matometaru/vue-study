@@ -23,14 +23,8 @@ export default Vue.extend({
   name: "ItemList",
   props: {
     items: Array,
-    userIds: Array
-  },
-  data() {
-    return {
-      filter: {
-        userId: "なし"
-      }
-    };
+    userIds: Array,
+    filter: Object,
   },
   computed: {
     filteredItemsByUserId() {

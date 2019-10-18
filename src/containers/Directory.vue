@@ -1,7 +1,7 @@
 <template>
   <div>
     <UserList :userIds="userIds" />
-    <ItemList :items="items" :userIds="userIds" />
+    <ItemList :items="items" :userIds="userIds" :filter="filter"/>
   </div>
 </template>
 
@@ -29,6 +29,9 @@ export default Vue.extend({
     return {
       items: [],
       userIds: config.userIds,
+      filter: {
+        userId: "なし"
+      },
     };
   },
   async mounted() {
