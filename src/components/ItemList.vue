@@ -24,21 +24,21 @@ export default Vue.extend({
   props: {
     items: Array,
     userIds: Array,
-    filter: Object,
+    filter: Object
   },
   computed: {
     filteredItemsByUserId() {
-      return this.items.filter((item) => {
-        return item.user.id === this.filter.userId
+      return this.items.filter(item => {
+        return item.user.id === this.filter.userId;
       });
     },
     filteredItems() {
-      if(this.filter.userId !== "なし") {
+      if (this.filter.userId !== "なし") {
         return this.filteredItemsByUserId;
       }
       return this.items;
-    },
-  },
+    }
+  }
 });
 </script>
 
@@ -51,7 +51,7 @@ export default Vue.extend({
     margin: 0 auto;
     li {
       & + li {
-        margin-top: .5em;
+        margin-top: 0.5em;
       }
     }
   }

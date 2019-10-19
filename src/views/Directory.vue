@@ -11,10 +11,9 @@ import Directory from "@/containers/Directory.vue";
 export default Vue.extend({
   name: "directory",
   components: {
-    Directory,
+    Directory
   }
 });
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>
