@@ -13,9 +13,10 @@
             label="価格の並び順"
             v-model="query.priceOrder"
             :items="input.priceOrder"
-            item-text="name"
-            item-value="id"
-          ></v-select>
+            item-text='name'
+            return-object
+          >
+          </v-select>
         </v-col>
         <v-col cols="12" sm="6" md="3">
           <v-text-field
@@ -38,25 +39,21 @@
 
 <script lang="ts">
 import Vue, { PropType } from "vue";
-import { PriceOrder } from "@/models/enums"
-
-type Item = {
-  code: number;
-  name: string;
-  price: number;
-}
+import { PriceOrder } from "@/models/enums";
+import Item from "@/models/Item";
+import Items from "@/models/Items";
 
 type Data = {
   query: {
     code: string;
     price: string;
-    priceOrder: number;
+    priceOrder: PriceOrder;
   };
   input: {
     priceOrder: PriceOrder[];
   };
   headers: any[];
-  items: Item[];
+  items: Items;
 }
 
 export default Vue.extend({
@@ -66,7 +63,7 @@ export default Vue.extend({
       query: {
         code: "",
         price: "",
-        priceOrder: PriceOrder.NoSelect.id
+        priceOrder: PriceOrder.NoSelect
       },
       input: {
         priceOrder: PriceOrder.values()
@@ -76,56 +73,29 @@ export default Vue.extend({
         { text: '企業名', value: 'name' },
         { text: '価格', value: 'price' },
       ],
-      items: [
-        { code: 8591, name: "オリックス", price: 1644 },
-        { code: 9861, name: "吉野家", price: 2672 },
-        { code: 2752, name: "フジオフード", price: 3040 },
-        { code: 3915, name: "テラスカイ", price: 1840 }
-      ]
+      items: new Items([
+        new Item(8591, "オリックス", 1644),
+        new Item(9861, "吉野家", 2672),
+        new Item(2752, "フジオフード", 3040),
+        new Item(3915, "テラスカイ", 1840),
+      ])
     };
   },
   computed: {
     filteredItems(): Item[] {
-      let items = this.items;
-      if (this.query.code !== "") {
-        items = this.filterByCode(items);
-      }
-      if (this.query.price !== "") {
-        items = this.filterByPrice(items);
-      }
-      if (this.query.priceOrder !== PriceOrder.NoSelect.id) {
-        items = this.sortByPrice(items);
-      }
-      return items;
+      return this.items
+        .filterByCode(this.query.code)
+        .filterByPrice(this.query.price)
+        .sortByPrice(this.query.priceOrder)
+        .get();
     }
   },
   methods: {
-    filterByCode(items: Item[]): Item[] {
-      return items.filter((item) => {
-        return item.code === Number(this.query.code);
-      });
-    },
-    filterByPrice(items: Item[]): Item[] {
-      return items.filter((item) => {
-        return item.price >= Number(this.query.price);
-      });
-    },
-    sortByPrice(items: Item[]): Item[] {
-      if (this.query.priceOrder == PriceOrder.High.id) {
-        return items.slice().sort((a, b) => {
-          return b.price - a.price;
-        });
-      }
-      // sortは破壊的なのでsliceをかます
-      return items.slice().sort((a, b) => {
-        return a.price - b.price;
-      });
-    },
     resetQuery(): void {
       this.query = {
         code: "",
         price: "",
-        priceOrder: PriceOrder.NoSelect.id
+        priceOrder: PriceOrder.NoSelect
       };
     }
   }
