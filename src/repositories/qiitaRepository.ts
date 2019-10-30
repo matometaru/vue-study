@@ -1,4 +1,14 @@
-import Repository from "@/repositories/Repository";
+import axios from "axios";
+import config from "@/config";
+
+const baseURL = "https://qiita.com/api/v2/";
+
+const Repository = axios.create({
+  baseURL,
+  headers: {
+    Authorization: "Bearer " + config.token
+  }
+});
 
 type qiitaItem = {
   body: string;

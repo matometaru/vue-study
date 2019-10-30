@@ -71,7 +71,7 @@ type Data = {
 }
 
 export default Vue.extend({
-  name: "Computed",
+  name: "Watch",
   data(): Data {
     return {
       query: {
