@@ -16,6 +16,12 @@
         </router-link> |
         <router-link to="/watch">
           Watch
+        </router-link> |
+        <router-link to="/signup">
+          Signup
+        </router-link> |
+        <router-link to="/signin">
+          Signin
         </router-link>
       </div>
       <router-view />

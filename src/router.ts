@@ -4,6 +4,8 @@ import Home from './views/Home.vue';
 import Directory from './views/Directory.vue';
 import Computed from './views/Computed.vue';
 import Watch from './views/Watch.vue';
+import Signup from './views/Signup.vue';
+import Signin from './views/Signin.vue';
 
 Vue.use(Router);
 
@@ -35,6 +37,16 @@ export default new Router({
       path: '/watch',
       name: 'watch',
       component: Watch,
+    },
+    {
+      path: '/signup',
+      name: 'Signup',
+      component: Signup,
+    },
+    {
+      path: '/signin',
+      name: 'Signin',
+      component: Signin,
     },
   ],
 });
