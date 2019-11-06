@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import Vue from "vue";
-import Directory from "@/containers/Directory.vue";
+import Vue from 'vue';
+import Directory from '@/containers/Directory.vue';
 
 export default Vue.extend({
-  name: "directory",
+  name: 'Directory',
   components: {
-    Directory
-  }
+    Directory,
+  },
 });
 </script>
 

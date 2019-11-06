@@ -2,20 +2,29 @@
   <div class="user">
     <h2>ユーザー一覧</h2>
     <ul class="user-list">
-      <li v-for="id in userIds" :key="id">{{ id }}</li>
+      <li
+        v-for="id in userIds"
+        :key="id"
+      >
+        {{ id }}
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-import config from "@/config";
+import Vue from 'vue';
 
 export default Vue.extend({
-  name: "UserList",
+  name: 'UserList',
   props: {
-    userIds: Array
-  }
+    userIds: {
+      type: Array,
+      default: () => {
+        return [];
+      },
+    },
+  },
 });
 </script>
 

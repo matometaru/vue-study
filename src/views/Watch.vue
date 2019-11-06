@@ -6,13 +6,13 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Watch from "@/components/Watch.vue";
+import Vue from 'vue';
+import Watch from '@/components/Watch.vue';
 
 export default Vue.extend({
-  name: "watch",
+  name: 'Watch',
   components: {
-    Watch
-  }
+    Watch,
+  },
 });
 </script>

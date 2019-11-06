@@ -1,32 +1,37 @@
 <template>
   <div class="gacha-center">
-    <h1 class="gacha-center-header">ガチャ</h1>
+    <h1 class="gacha-center-header">
+      ガチャ
+    </h1>
     <gacha-list />
   </div>
 </template>
 
 <script lang="ts">
-import Vue, { PropType } from 'vue';
+import Vue, {PropType} from 'vue';
 
 export default Vue.extend({
-  name: "GachaCenter",
+  name: 'GachaCenter',
   props: {
-    msg: String
+    msg: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
-      items: [] as PropType<{}>
+      items: [] as PropType<{}>,
     };
   },
   created() {
-    // 
+    //
   },
   mounted() {
     //
   },
   methods: {
     onPlayGacha(): string {
-      return "";
+      return '';
     },
   },
 });

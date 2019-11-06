@@ -6,13 +6,13 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Computed from "@/components/Computed.vue";
+import Vue from 'vue';
+import Computed from '@/components/Computed.vue';
 
 export default Vue.extend({
-  name: "computed",
+  name: 'Computed',
   components: {
-    Computed
-  }
+    Computed,
+  },
 });
 </script>

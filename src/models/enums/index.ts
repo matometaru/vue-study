@@ -1,3 +1,3 @@
-import PriceOrder from "./PriceOrder";
+import PriceOrder from './PriceOrder';
 
-export {PriceOrder}
+export {PriceOrder};
