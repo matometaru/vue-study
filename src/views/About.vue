@@ -6,13 +6,13 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import About from "@/components/About.vue";
+import Vue from 'vue';
+import About from '@/components/About.vue';
 
 export default Vue.extend({
-  name: "home",
+  name: 'Home',
   components: {
-    About
-  }
+    About,
+  },
 });
 </script>

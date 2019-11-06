@@ -1,30 +1,34 @@
 <template>
   <div>
-    <UserList :userIds="userIds" />
-    <ItemList :items="items" :userIds="userIds" :filter="filter" />
+    <UserList :user-ids="userIds" />
+    <ItemList
+      :items="items"
+      :user-ids="userIds"
+      :filter="filter"
+    />
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-import UserList from "@/components/UserList.vue";
-import ItemList from "@/components/ItemList.vue";
-import qiitaRepository from "@/repositories/qiitaRepository";
-import config from "@/config";
+import Vue from 'vue';
+import UserList from '@/components/UserList.vue';
+import ItemList from '@/components/ItemList.vue';
+import qiitaRepository from '@/repositories/qiitaRepository';
+import config from '@/config';
 
 export default Vue.extend({
-  name: "Directory",
+  name: 'Directory',
   components: {
     UserList,
-    ItemList
+    ItemList,
   },
   data() {
     return {
       items: [],
       userIds: config.userIds,
       filter: {
-        userId: "なし"
-      }
+        userId: 'なし',
+      },
     };
   },
   async mounted() {
@@ -36,13 +40,13 @@ export default Vue.extend({
       for (const userId of this.userIds) {
         fetchAllItems.push(qiitaRepository.getItemsBy(userId));
       }
-      Promise.all(fetchAllItems).then(itemsArray => {
+      Promise.all(fetchAllItems).then((itemsArray) => {
         for (const userItems of itemsArray) {
           this.items.push(...userItems);
         }
       });
-    }
-  }
+    },
+  },
 });
 </script>
 

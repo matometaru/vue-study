@@ -5,8 +5,10 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "run-p lint:*",
+    "lint:js": "eslint --fix \"**/*.{vue,{j,t}s?(x)}\"",
+    "lint:css": "stylelint \"src/**/*.vue\" --fix"
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -20,6 +22,8 @@
   "devDependencies": {
     "@mdi/font": "^4.5.95",
     "@types/jest": "^23.1.4",
+    "@typescript-eslint/eslint-plugin": "^2.6.0",
+    "@typescript-eslint/parser": "^2.6.0",
     "@vue/cli-plugin-babel": "^3.12.0",
     "@vue/cli-plugin-eslint": "^3.12.0",
     "@vue/cli-plugin-typescript": "^3.12.0",
@@ -30,14 +34,22 @@
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-vue": "^5.0.0",
+    "eslint": "^6.6.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-vue": "^5.2.3",
     "node-sass": "^4.12.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^1.18.2",
     "sass-loader": "^8.0.0",
+    "stylelint": "^11.1.1",
+    "stylelint-config-standard": "^19.0.0",
+    "stylelint-order": "^3.1.1",
+    "stylelint-scss": "^3.12.0",
     "ts-jest": "^23.0.0",
     "typescript": "^3.4.3",
+    "vue-eslint-parser": "^6.0.4",
     "vue-template-compiler": "^2.6.10"
   },
   "browserslist": [
