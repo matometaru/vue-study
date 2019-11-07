@@ -10,7 +10,7 @@ import Vue from 'vue';
 import Computed from '@/components/Computed.vue';
 
 export default Vue.extend({
-  name: 'Computed',
+  name: 'ComputedPage',
   components: {
     Computed,
   },

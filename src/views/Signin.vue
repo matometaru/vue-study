@@ -10,7 +10,7 @@ import Vue from 'vue';
 import Signin from '@/components/firebase/Signin.vue';
 
 export default Vue.extend({
-  name: 'Signin',
+  name: 'SigninPage',
   components: {
     Signin,
   },

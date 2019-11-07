@@ -10,7 +10,7 @@ import Vue from 'vue';
 import Watch from '@/components/Watch.vue';
 
 export default Vue.extend({
-  name: 'Watch',
+  name: 'WatchPage',
   components: {
     Watch,
   },

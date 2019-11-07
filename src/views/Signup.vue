@@ -1,18 +1,18 @@
 <template>
-  <div class="signin">
-    <h1>サインイン</h1>
-    <Signin />
-  </div>
+  <v-container>
+    <h1>サインアップ</h1>
+    <Signup />
+  </v-container>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import Signin from '@/components/firebase/Signin.vue';
+import Signup from '@/components/firebase/Signup.vue';
 
 export default Vue.extend({
-  name: 'Signin',
+  name: 'SignupPage',
   components: {
-    Signin,
+    Signup,
   },
 });
 </script>

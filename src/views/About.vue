@@ -10,7 +10,7 @@ import Vue from 'vue';
 import About from '@/components/About.vue';
 
 export default Vue.extend({
-  name: 'Home',
+  name: 'AboutPage',
   components: {
     About,
   },
