@@ -1,34 +1,32 @@
 <template>
   <div class="signup">
-    <h2>Sign up</h2>
-    <v-col cols="12">
-      <v-row
-        :align="alignment"
-        :justify="justify"
-        class="grey lighten-5"
-        style="height: 300px;"
+    <form
+      class="mx-auto"
+      style="max-width: 386px;"
+    >
+      <v-text-field
+        v-model="username"
+        type="text"
+        placeholder="Username"
+      />
+      <v-text-field
+        v-model="password"
+        type="password"
+        label="Password"
+      />
+      <v-btn
+        color="primary"
+        @click="signUp"
       >
-        <v-text-field
-          v-model="username"
-          type="text"
-          placeholder="Username"
-        />
-        <v-text-field
-          v-model="password"
-          type="password"
-          label="Password"
-        />
-        <button @click="signUp">
-          登録
-        </button>
-        <p>
-          Do you have an account?
-          <router-link to="/signin">
-            sign in now!!
-          </router-link>
-        </p>
-      </v-row>
-    </v-col>
+        登録
+      </v-btn>
+      <p class="mt-4">
+        Do you have an account?
+        <router-link to="/signin">
+          sign in now!!
+        </router-link>
+      </p>
+    </form>
   </div>
 </template>
 

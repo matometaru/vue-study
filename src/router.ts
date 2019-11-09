@@ -6,10 +6,14 @@ import Computed from './views/Computed.vue';
 import Watch from './views/Watch.vue';
 import Signup from './views/Signup.vue';
 import Signin from './views/Signin.vue';
+import Member from './views/member/Member.vue';
+import MemberEdit from './views/member/MemberEdit.vue';
+
+import firebase from 'firebase';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -48,5 +52,42 @@ export default new Router({
       name: 'Signin',
       component: Signin,
     },
+    {
+      path: '/member',
+      name: 'Member',
+      component: Member,
+      meta: {requiresAuth: true},
+    },
+    {
+      path: '/member/edit',
+      name: 'MemberEdit',
+      component: MemberEdit,
+      meta: {requiresAuth: true},
+    },
   ],
 });
+
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some((record) => {
+    return record.meta.requiresAuth;
+  });
+  if (requiresAuth) {
+    // このルートはログインされているかどうか認証が必要です。
+    // もしされていないならば、ログインページにリダイレクトします。
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        next();
+      } else {
+        next({
+          path: '/signin',
+          query: {redirect: to.fullPath},
+        });
+      }
+    });
+  } else {
+    next(); // next() を常に呼び出すようにしてください!
+  }
+});
+
+export default router;

@@ -6,7 +6,7 @@ const baseURL = 'https://qiita.com/api/v2/';
 const Repository = axios.create({
   baseURL,
   headers: {
-    Authorization: 'Bearer ' + config.token,
+    Authorization: 'Bearer ' + config.qiita.token,
   },
 });
 

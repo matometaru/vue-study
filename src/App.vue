@@ -22,6 +22,12 @@
         </router-link> |
         <router-link to="/signin">
           Signin
+        </router-link> |
+        <router-link to="/member">
+          Member
+        </router-link> |
+        <router-link to="/member/edit">
+          MemberEdit
         </router-link>
       </div>
       <router-view />

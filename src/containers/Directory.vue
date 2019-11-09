@@ -25,7 +25,7 @@ export default Vue.extend({
   data() {
     return {
       items: [],
-      userIds: config.userIds,
+      userIds: config.qiita.userIds,
       filter: {
         userId: 'なし',
       },
