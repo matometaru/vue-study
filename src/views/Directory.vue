@@ -9,7 +9,7 @@ import Vue from 'vue';
 import Directory from '@/containers/Directory.vue';
 
 export default Vue.extend({
-  name: 'Directory',
+  name: 'DirectoryPage',
   components: {
     Directory,
   },

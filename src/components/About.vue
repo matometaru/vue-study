@@ -3,7 +3,6 @@
     <h1 class="about-header">
       ガチャ
     </h1>
-    <gacha-list />
   </div>
 </template>
 
