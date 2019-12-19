@@ -8,6 +8,7 @@ import Signup from './views/Signup.vue';
 import Signin from './views/Signin.vue';
 import Member from './views/member/Member.vue';
 import MemberEdit from './views/member/MemberEdit.vue';
+import ErrorHandler from './views/ErrorHandler.vue';
 
 import firebase from 'firebase';
 
@@ -63,6 +64,11 @@ const router = new Router({
       name: 'MemberEdit',
       component: MemberEdit,
       meta: {requiresAuth: true},
+    },
+    {
+      path: '/error-handler',
+      name: 'ErrorHandler',
+      component: ErrorHandler,
     },
   ],
 });
