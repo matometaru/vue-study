@@ -28,6 +28,9 @@
         </router-link> |
         <router-link to="/member/edit">
           MemberEdit
+        </router-link> |
+        <router-link to="/error-handler">
+          ErrorHandler
         </router-link>
       </div>
       <router-view />

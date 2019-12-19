@@ -8,17 +8,23 @@
         cols="12"
         sm="6"
       >
-        <h2 class="mt-4">全件取得</h2>
+        <h2 class="mt-4">
+          全件取得
+        </h2>
         <v-data-table
           :headers="headers"
           :items="cities"
         />
-        <h2 class="mt-4">絞り込み取得（リアルタイム）</h2>
+        <h2 class="mt-4">
+          絞り込み取得（リアルタイム）
+        </h2>
         <v-data-table
           :headers="headers"
           :items="realtimeCities"
         />
-        <h2 class="mt-4">単体取得</h2>
+        <h2 class="mt-4">
+          単体取得
+        </h2>
         <div>
           {{ city }}
         </div>
@@ -63,17 +69,17 @@ export default Vue.extend({
     cityRepository = new CityRepository();
     try {
       this.cities = await cityRepository.getAll();
-      this.realtimeCities = await cityRepository.where("population", "<", 100).getSnapshot();
+      this.realtimeCities = await cityRepository.where('population', '<', 100).getSnapshot();
       this.city = await cityRepository.getCityBy('SF');
-    } catch(error) {
-        alert(`Error getting document: ${error}`);
+    } catch (error) {
+      alert(`Error getting document: ${error}`);
     }
   },
   methods: {
     async update() {
       await cityRepository.update('SF', {
         population: Math.floor(Math.random() * Math.floor(100)),
-      })
+      });
     },
   },
 });
