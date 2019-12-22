@@ -1,9 +1,20 @@
-name: Get Issue
+name: Get Issue and slack notification
 on: [issues]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: matometaru/sample-action@v1.1.4
+      - name: Get Issue
+      - uses: matometaru/sample-action@v1.1.5
         with:
-            labels: "test"
+          labels: "test"
+        id: sample
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_CHANNEL: self
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: 'Post Content :rocket: ${{ steps.sample.outputs.htmlUrl }}'
+          SLACK_TITLE: ${{ steps.sample.outputs.time }}
+          SLACK_USERNAME: rtCamp
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
