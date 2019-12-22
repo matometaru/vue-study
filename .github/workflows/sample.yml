@@ -4,6 +4,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: matometaru/sample-action@v1.1
+      - uses: matometaru/sample-action@v1.0
         with:
             label: "test"
