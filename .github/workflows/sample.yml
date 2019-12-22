@@ -1,0 +1,14 @@
+name: Get Issue
+
+on: [issues]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: matometaru/sample-action@1.0
+    - name: Sample Action
+      with:
+          label: "test"
