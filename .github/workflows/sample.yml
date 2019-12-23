@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Issue
-        uses: matometaru/sample-action@v1.1.7
+        uses: matometaru/sample-action@v1.1.9
         with:
           labels: "test"
         id: sample
