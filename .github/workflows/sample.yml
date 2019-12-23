@@ -1,20 +1,23 @@
-name: Get Issue and slack notification
-on: [issues]
+name: Get a random issue and slack notification
+on:
+  schedule:
+  # UTC
+  - cron: '0 0 * * 1'
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Get Issue
-        uses: matometaru/sample-action@v1.1.9
+      - name: Get random issue gacha
+        uses: matometaru/issue-gacha-action@v1.0.0
         with:
           labels: "test"
-        id: sample
+        id: gacha
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@master
         env:
           SLACK_CHANNEL: self
           SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: 'Result: ${{ steps.sample.outputs.htmlUrl }}'
-          SLACK_TITLE: ${{ steps.sample.outputs.title }}
+          SLACK_MESSAGE: 'Result: ${{ steps.gacha.outputs.htmlUrl }}'
+          SLACK_TITLE: ${{ steps.gacha.outputs.title }}
           SLACK_USERNAME: rtCamp
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
