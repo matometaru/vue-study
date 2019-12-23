@@ -9,6 +9,8 @@ jobs:
         with:
           labels: "test"
         id: sample
+      - name: Echo the greeting's time
+        run: echo 'The time was ${{ steps.sample.outputs.title }}.'
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@master
         env:
