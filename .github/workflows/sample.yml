@@ -9,8 +9,16 @@ jobs:
         with:
           labels: "test"
         id: sample
-      - name: Echo the greeting's time
+      - name: Echo the greeting's title
         run: echo 'The time was ${{ steps.sample.outputs.title }}.'
+      - name: Hello world
+        uses: actions/hello-world-javascript-action@v1
+        with:
+          who-to-greet: 'Mona the Octocat'
+        id: hello
+      # This step prints an output (time) from the previous step's action.
+      - name: Echo the greeting's time
+        run: echo 'The time was ${{ steps.hello.outputs.time }}.'
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@master
         env:
