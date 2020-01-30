@@ -31,6 +31,9 @@
         </router-link> |
         <router-link to="/error-handler">
           ErrorHandler
+        </router-link> |
+        <router-link to="/skyway">
+          Skyway
         </router-link>
       </div>
       <router-view />

@@ -9,6 +9,7 @@ import Signin from './views/Signin.vue';
 import Member from './views/member/Member.vue';
 import MemberEdit from './views/member/MemberEdit.vue';
 import ErrorHandler from './views/ErrorHandler.vue';
+import Skyway from './views/Skyway.vue';
 
 import firebase from 'firebase';
 
@@ -69,6 +70,11 @@ const router = new Router({
       path: '/error-handler',
       name: 'ErrorHandler',
       component: ErrorHandler,
+    },
+    {
+      path: '/skyway',
+      name: 'Skyway',
+      component: Skyway,
     },
   ],
 });
