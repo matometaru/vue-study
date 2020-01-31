@@ -8,13 +8,15 @@
         label="Label"
       ></v-text-field>
       <v-btn @click="connection(inputs.remoteId)">接続</v-btn>
-      <p>messages: {{ messages }}</p>
+      <pre>
+        {{ messages }}
+      </pre>
       <p>localMessages: {{ localMessages }}</p>
       <v-text-field
         v-model="localMessages"
         label="メッセージ"
       ></v-text-field>
-      <v-btn @click="onClickSend()">送信</v-btn>
+      <v-btn @click="onClickSend(dataConnection)">送信</v-btn>
     </v-container>
   </div>
 </template>
@@ -51,13 +53,15 @@ export default Vue.extend({
     };
   },
   async mounted() {
-    this.peer.once('open', id => (this.localId = id));
-    // オープン
+    // 自身のIDを設定
     this.peer.once('open', (id: string) => (this.localId = id));
-    // 全キーイベントを設定
-    window.addEventListener("keydown", this.keydownController)
+    // 相手から接続があった場合
+    this.peer.on('connection', (dataConnection: DataConnection) => {
+      this.receive(dataConnection);
+    })
   },
   methods: {
+    // ターゲットのIDに接続
     connection(remoteId: string): void {
       if (!this.peer.open) {
         return;
@@ -73,35 +77,9 @@ export default Vue.extend({
         this.messages += `Remote: ${data}\n`;
       });
     },
-    keydownController(event: KeyboardEvent) {
-      // https://github.com/pione30/TypeScript-Vue-Tetris/blob/master/src/components/PlayField.vue
-      switch (event.keyCode) {
-        case 37:
-        case 65:
-          // Left or A
-          event.preventDefault()
-          break
-        case 38:
-        case 87:
-          // Up or W
-          event.preventDefault()
-          break
-        case 39:
-        case 68:
-          // Right or D
-          event.preventDefault()
-          break
-        case 40:
-        case 83:
-          // Down or S
-          event.preventDefault()
-          break
-      }
-      if (!this.dataConnection) {
-        return;
-      }
+    onClickSend(dataConnection: DataConnection) {
       const data = this.localMessages;
-      this.dataConnection.send(data);
+      dataConnection.send(data);
 
       this.messages += `You: ${data}\n`;
       this.localMessages = '';
@@ -114,6 +92,15 @@ export default Vue.extend({
         this.messages += `=== DataConnection has been closed ===\n`;
       });
     },
+    receive(dataConnection: DataConnection) {
+      dataConnection.once('open', async () => {
+        this.messages += `=== DataConnection has been opened ===\n`;
+      });
+
+      dataConnection.on('data', (data: string) => {
+        this.messages += `Remote: ${data}\n`;
+      });
+    }
   },
 });
 </script>
