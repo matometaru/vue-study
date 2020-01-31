@@ -54,7 +54,8 @@ export default Vue.extend({
     this.peer.once('open', id => (this.localId = id));
     // オープン
     this.peer.once('open', (id: string) => (this.localId = id));
-    // 相手に接続？
+    // 全キーイベントを設定
+    window.addEventListener("keydown", this.keydownController)
   },
   methods: {
     connection(remoteId: string): void {
@@ -72,7 +73,30 @@ export default Vue.extend({
         this.messages += `Remote: ${data}\n`;
       });
     },
-    onClickSend() {
+    keydownController(event: KeyboardEvent) {
+      // https://github.com/pione30/TypeScript-Vue-Tetris/blob/master/src/components/PlayField.vue
+      switch (event.keyCode) {
+        case 37:
+        case 65:
+          // Left or A
+          event.preventDefault()
+          break
+        case 38:
+        case 87:
+          // Up or W
+          event.preventDefault()
+          break
+        case 39:
+        case 68:
+          // Right or D
+          event.preventDefault()
+          break
+        case 40:
+        case 83:
+          // Down or S
+          event.preventDefault()
+          break
+      }
       if (!this.dataConnection) {
         return;
       }
