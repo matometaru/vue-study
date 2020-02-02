@@ -5,7 +5,7 @@ import store from './store';
 import vuetify from './plugins/vuetify';
 import firebase from 'firebase';
 import config from '@/config';
-import '@/errorHandler';
+// import '@/errorHandler';
 
 Vue.config.productionTip = false;
 
