@@ -15,14 +15,14 @@ export default class Position {
   }
 
   toRight() {
-    if (this.x >= 10) {
+    if (this.x >= 12) {
       return;
     }
     this.x++;
   }
 
   toDown() {
-    if (this.y >= 10) {
+    if (this.y >= 12) {
       return;
     }
     this.y++;
@@ -36,11 +36,13 @@ export default class Position {
   }
 
   positionX(): number {
-    return this.x * 30;
+    const WALL_SIZE = 50;
+    return this.x * 50 + WALL_SIZE;
   }
 
   positionY(): number {
-    return this.y * 30;
+    const WALL_SIZE = 50;
+    return this.y * 50 + WALL_SIZE;
   }
 
   toString(): string {

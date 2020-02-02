@@ -1,12 +1,45 @@
 <template>
   <div class="skyway">
-    <div id="fields">
+    <svg width="750" height="750" viewBox="0 0 750 750">
+      <g>
+        <template v-for="(columns, rowIndex) in map">
+          <template v-for="(parcel, columnIndex) in columns">
+            <template v-if="parcel === 0">
+              <rect
+                :x="columnIndex * 50"
+                :y="rowIndex * 50"
+                width="50"
+                height="50"
+                fill="#B1D561"
+                :key="`${rowIndex}-${columnIndex}`"
+              />
+            </template>
+            <template v-else-if="parcel === 1">
+              <rect
+                :x="columnIndex * 50"
+                :y="rowIndex * 50"
+                width="50"
+                height="50"
+                stroke-width="1"
+                :key="`${rowIndex}-${columnIndex}`"
+              />
+            </template>
+          </template>
+        </template>
+      </g>
       <template v-for="player in players">
-        <div :key="player.id" :style="`top: ${player.position.positionY()}px; left: ${player.position.positionX()}px`">
-          {{ player.name }}
-        </div>
+        <g
+          :key="player.id"
+          :transform="`translate(${player.position.positionX()}, ${player.position.positionY()})`"
+        >
+          <text
+            font-family="Verdana"
+            font-size="10"
+          >{{ player.id }}</text>
+          <circle cx="25" cy="25" r="20"/>
+        </g>
       </template>
-    </div>
+    </svg>
     <v-container fluid>
       <h1>SkyWay</h1>
       <v-text-field
@@ -52,7 +85,7 @@ export default Vue.extend({
         debug: 3,
       }),
       room: null,
-      map: new Map(10, 10).generate(),
+      map: new Map(13, 13).generate(),
       inputs: {
         roomId: '',
       },
@@ -151,21 +184,12 @@ export default Vue.extend({
           break;
       }
     },
-    // プレイヤーを描画（とりあえずインターバルで実行）
     draw() {
-      // let html = "";
-      // for (const key in this.players) {
-      //   const positionX = this.players[key].position.x * 5;
-      //   const positionY = this.players[key].position.y * 5;
-      //   html += `
-      //     <div class="${key}" style="top: ${positionX}; left ${positionY};">
-      //       ${this.players[key].name}
-      //     </div>
-      //   `;
-      //   console.log(this.players[key].position);
+      // for (const columns of this.map) {
+      //   for (const parcel of columns) {
+
+      //   }
       // }
-      // const fields: any = document.getElementById('fields');
-      // fields.textContent = html;
     }
   },
 });
