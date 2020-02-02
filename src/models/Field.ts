@@ -1,16 +1,15 @@
 import Player from './Player';
 
-export default class Map {
+export default class Field {
   column: number = 13;
   row: number = 13;
-  players: Player[] = [];
 
-  constructor(column: number, row: number, players?: Player[]) {
+  static COLUMN_NUM = 13;
+  static ROW_NUM = 13;
+
+  constructor(column: number, row: number) {
     this.column = column;
     this.row = row;
-    if (players) { 
-      this.players = players;
-    }
   }
 
   generate(): number[][] {

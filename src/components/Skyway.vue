@@ -1,8 +1,12 @@
 <template>
   <div class="skyway">
+    <h2>参加者ID</h2>
+    <p v-for="player in players" :key="player.id">
+      {{ player.id }}
+    </p>
     <svg width="750" height="750" viewBox="0 0 750 750">
       <g>
-        <template v-for="(columns, rowIndex) in map">
+        <template v-for="(columns, rowIndex) in field">
           <template v-for="(parcel, columnIndex) in columns">
             <template v-if="parcel === 0">
               <rect
@@ -41,7 +45,6 @@
       </template>
     </svg>
     <v-container fluid>
-      <h1>SkyWay</h1>
       <v-text-field
         v-model="inputs.roomId"
         label="Room ID"
@@ -50,11 +53,6 @@
       <pre>
         {{ messages }}
       </pre>
-      <v-text-field
-        v-model="localMessages"
-        label="メッセージ"
-      ></v-text-field>
-      <v-btn @click="onClickSend()">送信</v-btn>
     </v-container>
   </div>
 </template>
@@ -64,12 +62,12 @@ import Vue, {PropType} from 'vue';
 import Peer, {MeshRoom} from 'skyway-js';
 import config from '@/config';
 import Player from '@/models/Player';
-import Map from '@/models/Map';
+import Field from '@/models/Field';
 
 type Data = {
   peer: Peer;
   room: MeshRoom | null;
-  map: any[][];
+  field: any[][];
   inputs: any;
   messages: string;
   localMessages: string;
@@ -85,7 +83,7 @@ export default Vue.extend({
         debug: 3,
       }),
       room: null,
-      map: new Map(13, 13).generate(),
+      field: new Field(13, 13).generate(),
       inputs: {
         roomId: '',
       },
@@ -114,18 +112,21 @@ export default Vue.extend({
       // 新規にPeerがルームへ入室したときに発生します。
       this.room.once('open', () => {
         this.messages += '=== You joined ===\n';
+        if (this.room) {
+          const peerId = this.room._peerId;
+          this.players[peerId] = new Player(peerId, '●');
+        }
       });
 
       // ルームに新しいPeerが参加したときに発生します。
       this.room.on('peerJoin', (peerId: string) => {
-        this.messages += `=== ${peerId} joined2 ===\n`;
+        this.messages += `=== ${peerId} joined ===\n`;
         this.players[peerId] = new Player(peerId, '●');
       });
 
       // 他のユーザーから送信されたデータを受信した時に発生します。
       this.room.on('data', ({data, src}) => {
         const peerId = src;
-        console.log(`peerId: ${peerId}`)
         if (!this.players.hasOwnProperty(peerId)) {
           this.players[peerId] = new Player(peerId, '▲');
         }
@@ -143,22 +144,18 @@ export default Vue.extend({
         this.messages += '== You left ===\n';
       });
     },
-    sendMessages(messages: string) {
+    sendMessages(data: string) {
       if (!this.room) {
         return;
       }
-      this.room.send(messages);
-      this.messages += `You: ${messages}\n`;
-    },
-    onClickSend() {
-      if (!this.room) {
-        return;
-      }
-      const data = this.localMessages;
       this.room.send(data);
+      this.messages += `You: ${data}\n`;
 
-      this.messages += `${this.peer.id}: ${data}\n`;
-      this.localMessages = '';
+      const peerId = this.room._peerId;
+      if (!this.players.hasOwnProperty(peerId)) {
+        this.players[peerId] = new Player(peerId, '▲');
+      }
+      this.players[peerId].move(data)
     },
     keydownController(event: KeyboardEvent) {
       switch (event.keyCode) {
@@ -182,6 +179,11 @@ export default Vue.extend({
           event.preventDefault()
           this.sendMessages('↓')
           break;
+        case Vue.config.keyCodes.space:
+          // Down
+          event.preventDefault()
+          this.sendMessages('space')
+          break;
       }
     },
     draw() {
@@ -196,21 +198,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-#fields {
-  position: relative;
-  width: 500px;
-  width: 500px;
-  > div {
-    position: absolute;
-  }
-}
-table {
-  height: 500px;
-  width: 500px;
-}
-td {
-  width: 50px;
-  height: 50px;
-  background-color:#ddd;
+g {
+  fill: #333;
+  transition: all 0.1s;
 }
 </style>

@@ -1,6 +1,13 @@
+import Field from './Field';
+
 export default class Position {
   x: number = 0;
   y: number = 0;
+
+  static TOP_LEFT = [0, 0];
+  static TOP_RIGHT = [Field.COLUMN_NUM, 0];
+  static BOTTOM_RIGHT = [Field.COLUMN_NUM, Field.ROW_NUM];
+  static BOTTOM_LEFT = [0, Field.ROW_NUM];
 
   constructor(x: number, y: number) {
     this.x = x;
