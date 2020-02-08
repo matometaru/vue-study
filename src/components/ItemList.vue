@@ -23,7 +23,7 @@
         v-for="item in filteredItems"
         :key="item.id"
       >
-        <a :href="item.url">{{ item.title }}</a>
+        <a :href="item.url">{{ item.shortTitle() }}</a>
       </li>
     </ul>
   </div>

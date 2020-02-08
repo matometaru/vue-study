@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '@/config';
+import QiitaItem from '@/models/QiitaItem';
 
 const baseURL = 'https://qiita.com/api/v2/';
 
@@ -10,17 +11,13 @@ const Repository = axios.create({
   },
 });
 
-type qiitaItem = {
-  body: string;
-  created_at: string; // eslint-disable-line camelcase
-  title: string;
-  url: string;
-  [key: string]: any;
-};
-
 export default {
-  async getItemsBy(userId: number): Promise<qiitaItem[]> {
-    const {data} = await Repository.get(`users/${userId}/items`);
-    return data;
+  async getItemsBy(userId: string): Promise<QiitaItem[]> {
+    const { data } = await Repository.get(`users/${userId}/items`);
+    const qiitaItems = [];
+    for (const item of data) {
+      qiitaItems.push(new QiitaItem(item.body, item.created_at, item.title, item.url));
+    }
+    return qiitaItems;
   },
 };

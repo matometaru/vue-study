@@ -9,12 +9,21 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from 'vue';
 import UserList from '@/components/UserList.vue';
 import ItemList from '@/components/ItemList.vue';
 import qiitaRepository from '@/repositories/qiitaRepository';
 import config from '@/config';
+import QiitaItem from '@/models/QiitaItem';
+
+type Data = {
+  items: QiitaItem[];
+  userIds: string[],
+  filter: {
+    userId: string;
+  };
+};
 
 export default Vue.extend({
   name: 'Directory',
@@ -22,7 +31,7 @@ export default Vue.extend({
     UserList,
     ItemList,
   },
-  data() {
+  data(): Data {
     return {
       items: [],
       userIds: config.qiita.userIds,
