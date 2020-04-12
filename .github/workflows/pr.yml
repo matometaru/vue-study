@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Close PR by deadline
-        uses: matometaru/pr-deadline@0.0.1
+        uses: matometaru/pr-deadline@0.0.2
         with:
           token: ${{ secrets.LGTM_TOKEN }}
           expirationDate: 1
