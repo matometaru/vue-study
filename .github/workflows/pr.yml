@@ -9,7 +9,7 @@ jobs:
       - name: Close PR by deadline
         uses: matometaru/pr-deadline@0.0.3
         with:
-          token: ${{ secrets.LGTM_TOKEN }}
+          token: ${{ secrets.PR_TOKEN }}
           expirationDate: 1
         id: prDeadline
       - name: Slack Notification
