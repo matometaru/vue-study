@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get random issue gacha
-        uses: matometaru/pr-deadline@v0.0.1
+        uses: matometaru/pr-deadline@0.0.1
         with:
           token: ${{ secrets.LGTM_TOKEN }}
         id: prDeadline
