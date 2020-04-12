@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Close PR by deadline
-        uses: matometaru/pr-deadline@0.0.5
+        uses: matometaru/pr-deadline@0.0.7
         with:
           token: ${{ secrets.PR_TOKEN }}
           expirationDate: -1
@@ -17,7 +17,7 @@ jobs:
         env:
           SLACK_CHANNEL: self
           SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: ${{ toJson(steps.prDeadline.outputs.closedPulls)[0] }}
-          SLACK_TITLE: ${{ steps.prDeadline.outputs.closedPulls[0] }}
+          SLACK_MESSAGE: ${{ steps.prDeadline.outputs.message }}
+          SLACK_TITLE: pr-deadline
           SLACK_USERNAME: rtCamp
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
