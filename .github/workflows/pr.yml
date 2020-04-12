@@ -1,7 +1,7 @@
 name: Close PR by deadline and slack notification
 on:
   schedule:
-  - cron: '0 0 * * *'
+  - cron: '*/3 * * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,6 +13,7 @@ jobs:
           expirationDate: -1
         id: prDeadline
       - name: Slack Notification
+        if: steps.prDeadline.outputs.closedPulls != '[]'
         uses: rtCamp/action-slack-notify@master
         env:
           SLACK_CHANNEL: self
