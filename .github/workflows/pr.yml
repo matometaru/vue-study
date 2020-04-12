@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Close PR by deadline
-        uses: matometaru/pr-deadline@0.0.9
+        uses: matometaru/pr-deadline@0.1.0
         with:
           token: ${{ secrets.PR_TOKEN }}
           expirationDate: -1
