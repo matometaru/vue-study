@@ -1,7 +1,7 @@
 name: Close PR by deadline and slack notification
 on:
   schedule:
-  - cron: '*/10 * * * *'
+  - cron: '*/3 * * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
