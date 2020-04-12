@@ -10,7 +10,7 @@ jobs:
         uses: matometaru/pr-deadline@0.0.3
         with:
           token: ${{ secrets.PR_TOKEN }}
-          expirationDate: 1
+          expirationDate: 0
         id: prDeadline
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@master
