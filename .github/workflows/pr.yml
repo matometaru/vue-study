@@ -1,13 +1,13 @@
 name: Close PR by deadline and slack notification
 on:
   schedule:
-  - cron: '*/5 * * * *'
+  - cron: '*/15 * * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Close PR by deadline
-        uses: matometaru/pr-deadline@0.0.7
+        uses: matometaru/pr-deadline@0.0.8
         with:
           token: ${{ secrets.PR_TOKEN }}
           expirationDate: -1
